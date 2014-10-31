@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
   
   def following
-    @following = current_user.following_users
+    @following = current_user.following_users rescue nil
   end
   
   def unfollow
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @followers = current_user.followers
+    @followers = current_user.followers rescue nil
   end
   
 end
