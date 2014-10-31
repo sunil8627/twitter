@@ -1,25 +1,70 @@
-<h1>Listing tweets</h1>
+<% if user_signed_in? %>
+  <%= form_tag('/search') do %>
+    <%= text_field_tag "search_text" %>
+    <%= submit_tag "Search users", :class => "btn btn-primary" %> 
+  <% end %>
+<% end %>
 
-<table>
-  <tr>
-    <th>Text</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <% if notice.present? or alert.present? %>
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert">
+		×
+	</button>
+	<strong><%= notice %> <%= alert %></strong>
+</div>
+<% end %>
+  
+<% if @user %>
+   <h3>Search results</h3>
+  <div class="container">
+	<div class="row">
+		<div class="span4"></div>
+		<div class="span5">
+			<table class="table table-striped table-condensed">
+				<thead>
+				   <tr>	
+					<th>Email</th>
+					<th>Username</th>
+					<th></th>
+				   </tr> 	
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= @user.email %></td>
+						<td><%= @user.username %></td>
+						<td>
+						  <%= tag "input", { "class" => "btn btn-primary", "type" => "button", "value" => "Follow", "onclick" => "update_following(#{@user.id});" } %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+  </div>
+<% end %>
+
+<h4>Listing tweets</h4>
+
+<table class="table">
+  
 
 <% @tweets.each do |tweet| %>
   <tr>
     <td><%= tweet.text %></td>
-    <td><%= tweet.user_id %></td>
-    <td><%= link_to 'Show', tweet %></td>
-    <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-    <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Tweet', new_tweet_path %>
+<%= link_to 'Add a New Tweet', new_tweet_path %>
+
+
+
+<script type="text/javascript">
+  function update_following(userid){
+	var user_id = userid;
+	
+	$.get( "/follow", { user: user_id});
+  };  
+</script>

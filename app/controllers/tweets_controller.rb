@@ -3,6 +3,7 @@ class TweetsController < ApplicationController
   respond_to :html, :xml, :js
 
   def index
+    @user = User.find params[:user].first rescue nil
     @tweets = Tweet.all
     respond_with(@tweets)
   end
@@ -34,6 +35,7 @@ class TweetsController < ApplicationController
     @tweet.destroy
     respond_with(@tweet)
   end
+  
 
   private
     def set_tweet

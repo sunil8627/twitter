@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="head">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="span6">
+                    <h1 class="muted">Twitter</h1>
+                </div>
+
+                <div class="span4 offset2" style="margin-top:15px;">
+                    <% if user_signed_in? %>
+					  Logged in as <%= current_user.username %>
+					  <button class="btn pull-right" type="button"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></button>
+					<% else %>
+                      <button class="btn pull-right" type="button"><%= link_to 'Sign In', "/users/sign_in" %></button>
+                      <button class="btn pull-right" type="button"><%= link_to 'Sign Up', "/users/sign_up" %></button>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul class="nav">
+                        <li>
+                            <%= link_to "Home", tweets_path %>
+                        </li>
+                         
+                        <li>
+                            <%= link_to "Add tweet", new_tweet_path %>
+                        </li>
+
+                        <li>
+                            <%= link_to 'Followers', '/followers' %>
+                        </li>
+
+                        <li>
+                            <%= link_to 'Following', '/following' %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,13 @@ Twitter::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+   match '/search' => 'application#search'
+   
+   match '/follow' => 'users#follow'
+   match '/following' => 'users#following'
+   match '/unfollow' => 'users#unfollow'
+   match '/followers' => 'users#followers'
+   
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
@@ -53,7 +60,7 @@ Twitter::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'tweets#index'
 
   # See how all your routes lay out with "rake routes"
 
